@@ -1,5 +1,6 @@
 package dev.fredyhg.raffleluteranosddd.common;
 
+import java.util.List;
 import java.util.regex.Pattern;
 
 public class AssertionConcern {
@@ -22,6 +23,12 @@ public class AssertionConcern {
     public static void assertArgumentMinLength(String aString, int aMinimum, String aMessage) {
         int length = aString.trim().length();
         if (length < aMinimum) {
+            throw new IllegalArgumentException(aMessage);
+        }
+    }
+
+    public static void assertArgumentMinSize(List aList, int aMinimum, String aMessage) {
+        if (aList == null || aList.size() < aMinimum) {
             throw new IllegalArgumentException(aMessage);
         }
     }

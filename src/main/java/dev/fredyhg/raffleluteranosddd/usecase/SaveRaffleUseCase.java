@@ -7,14 +7,22 @@ import dev.fredyhg.raffleluteranosddd.infrastructure.http.request.RafflePostRequ
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
+import java.util.List;
+
 @Component
 @RequiredArgsConstructor
 public class SaveRaffleUseCase {
 
     private final ReceiveRequestRafflePortImpl receiveRequestRafflePortImpl;
 
-    public void save(RafflePostRequest request) {
-        Raffle raffle = RaffleMapper.toRaffle(request);
-        receiveRequestRafflePortImpl.save(raffle);
+
+    public List<Raffle> saveAll(List<RafflePostRequest> request) {
+
+        List<Raffle> listOfRaffle = request
+                .stream()
+                .map(RaffleMapper::toRaffle)
+                .toList();
+
+        return receiveRequestRafflePortImpl.saveAll(listOfRaffle);
     }
 }

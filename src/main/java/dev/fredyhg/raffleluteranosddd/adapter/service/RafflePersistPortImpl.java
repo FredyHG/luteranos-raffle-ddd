@@ -8,8 +8,11 @@ import dev.fredyhg.raffleluteranosddd.domain.ports.RafflePersistPort;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
-@Component
-@RequiredArgsConstructor
+import java.util.HashMap;
+import java.util.List;
+
+    @Component
+    @RequiredArgsConstructor
 public class RafflePersistPortImpl implements RafflePersistPort {
 
     private final RaffleRepository raffleRepository;
@@ -17,12 +20,19 @@ public class RafflePersistPortImpl implements RafflePersistPort {
     private final ImageUploadService imageUploadService;
 
     @Override
-    public void save(Raffle raffle) {
-        String urlImage = imageUploadService.uploadImage(raffle.getImageBase64());
-        RaffleModel raffleModel = RaffleMapper.toRaffleModel(raffle, urlImage);
+    public void saveAll(List<Raffle> raffles) {
 
-        System.out.println(raffleModel);
+        HashMap<String, String> nameUrlImage = new HashMap<>();
 
-        raffleRepository.save(raffleModel);
+        for (Raffle raffle : raffles) {
+            String imageUrl = imageUploadService.uploadImage(raffle.getImageBase64());
+            nameUrlImage.put(raffle.getName(), imageUrl);
+        }
+
+        List<RaffleModel> listRafflesToBeSaved = raffles.stream().map(
+                raffle -> RaffleMapper.toRaffleModel(raffle, nameUrlImage.get(raffle.getName()))
+        ).toList();
+
+        raffleRepository.saveAll(listRafflesToBeSaved);
     }
 }

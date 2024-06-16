@@ -23,6 +23,18 @@ public class AvailableRaffleModel {
     @JoinColumn(name = "raffle_id")
     private List<RaffleModel> available;
     private LocalDateTime createdAt;
+    @Enumerated(EnumType.STRING)
     private AvailableRaffleStatus status;
 
+    public AvailableRaffleModel(String id, Integer qntRaffle, LocalDateTime createdAt, List<RaffleModel> raffles, String raffleType, AvailableRaffleStatus status, List<RaffleModel> available) {
+        this.id = id;
+        this.qntRaffle = qntRaffle;
+        this.createdAt = createdAt;
+        this.raffles = raffles;
+        this.raffleType = raffleType;
+        this.status = status;
+        this.available = available;
+    }
+
+    protected AvailableRaffleModel() {}
 }

@@ -15,8 +15,7 @@ public class OrderModel {
 
     @Id
     private String id;
-    @OneToMany
-    @JoinColumn(name = "raffle_id")
+    @OneToMany(cascade = CascadeType.PERSIST)
     private List<RaffleModel> raffles;
     private LocalDateTime buyAt;
     private BigDecimal total;

@@ -1,7 +1,7 @@
 package dev.fredyhg.raffleluteranosddd.domain.models.availableraffle;
 
-import dev.fredyhg.raffleluteranosddd.common.AssertionConcern;
 import dev.fredyhg.raffleluteranosddd.common.domain.Aggregate;
+import dev.fredyhg.raffleluteranosddd.domain.enums.AvailableRaffleStatus;
 import dev.fredyhg.raffleluteranosddd.domain.models.raffle.Raffle;
 import lombok.Getter;
 
@@ -19,6 +19,7 @@ public class AvailableRaffle extends Aggregate<AvailableRaffleId> {
     private final Integer qntRaffle;
     private List<Raffle> availableRaffles = new ArrayList<>();
     private final LocalDateTime createdAt;
+    private final AvailableRaffleStatus status;
 
     public AvailableRaffle(String raffleType, List<Raffle> raffles) {
         super(new AvailableRaffleId());
@@ -33,6 +34,7 @@ public class AvailableRaffle extends Aggregate<AvailableRaffleId> {
         this.raffles = raffles;
         this.qntRaffle = raffles.size();
         this.createdAt = LocalDateTime.now();
+        this.status = AvailableRaffleStatus.WAIT_FINISH;
 
         if(availableRaffles.isEmpty()) {
             this.availableRaffles = raffles;

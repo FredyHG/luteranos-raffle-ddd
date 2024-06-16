@@ -2,6 +2,8 @@ package dev.fredyhg.raffleluteranosddd.domain.ports;
 
 import dev.fredyhg.raffleluteranosddd.domain.models.raffle.Raffle;
 
+import java.util.List;
+
 public interface RafflePersistPort {
-    void save(Raffle raffle);
+    void saveAll(List<Raffle> raffle);
 }

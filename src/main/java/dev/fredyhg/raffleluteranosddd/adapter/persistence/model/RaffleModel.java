@@ -2,7 +2,6 @@ package dev.fredyhg.raffleluteranosddd.adapter.persistence.model;
 
 import jakarta.persistence.*;
 import lombok.Data;
-import lombok.Setter;
 
 import java.math.BigDecimal;
 
@@ -24,4 +23,14 @@ public class RaffleModel {
     @JoinColumn(name = "available_raffle_id")
     private AvailableRaffleModel typeRaffle;
 
+
+    public RaffleModel(String id, String name, String imageUrl, BigDecimal price) {
+        this.id = id;
+        this.name = name;
+        this.imageUrl = imageUrl;
+        this.price = price;
+    }
+
+    protected RaffleModel() {
+    }
 }

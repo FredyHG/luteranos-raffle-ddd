@@ -3,7 +3,11 @@ spring:
     name: raffle-luteranos-ddd
 
   datasource:
-    url: jdbc:postgresql://aws-0-us-west-1.pooler.supabase.com:5432/postgres
-    username: postgres.jylhdsqoojmbskzpdmvp
-    password: PLNcqhW33osPzVnn
+    url: jdbc:postgresql://localhost:5432/postgres
+    username: postgres
+    password: 1234
     driver-class-name: org.postgresql.Driver
+  jpa:
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+    hibernate:
+      ddl-auto: update

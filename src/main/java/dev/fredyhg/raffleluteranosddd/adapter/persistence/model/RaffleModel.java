@@ -19,11 +19,6 @@ public class RaffleModel {
     @JoinColumn(name = "order_id")
     private OrderModel order;
 
-    @ManyToOne
-    @JoinColumn(name = "available_raffle_id")
-    private AvailableRaffleModel typeRaffle;
-
-
     public RaffleModel(String id, String name, String imageUrl, BigDecimal price) {
         this.id = id;
         this.name = name;

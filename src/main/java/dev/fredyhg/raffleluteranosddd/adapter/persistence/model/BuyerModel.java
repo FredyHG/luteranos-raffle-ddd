@@ -14,4 +14,13 @@ public class BuyerModel {
     private String name;
     private String email;
     private String cpf;
+
+    public BuyerModel(String id, String email, String name, String cpf) {
+        this.id = id;
+        this.email = email;
+        this.name = name;
+        this.cpf = cpf;
+    }
+
+    protected BuyerModel() {}
 }

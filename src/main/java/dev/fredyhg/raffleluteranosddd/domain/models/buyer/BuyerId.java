@@ -8,4 +8,8 @@ public class BuyerId extends Identifier<UUID> {
     protected BuyerId() {
         super(UUID.randomUUID());
     }
+
+    public BuyerId(String id) {
+        super(UUID.fromString(id));
+    }
 }

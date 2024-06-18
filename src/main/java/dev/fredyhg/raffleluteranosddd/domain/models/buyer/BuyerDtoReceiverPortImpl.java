@@ -1,7 +1,7 @@
 package dev.fredyhg.raffleluteranosddd.domain.models.buyer;
 
-import dev.fredyhg.raffleluteranosddd.domain.ports.BuyerPersistPort;
 import dev.fredyhg.raffleluteranosddd.domain.ports.BuyerDtoReceiverPort;
+import dev.fredyhg.raffleluteranosddd.domain.ports.BuyerPersistPort;
 
 public class BuyerDtoReceiverPortImpl implements BuyerDtoReceiverPort {
 

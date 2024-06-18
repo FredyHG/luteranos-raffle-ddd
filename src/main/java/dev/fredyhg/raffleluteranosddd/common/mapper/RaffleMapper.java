@@ -15,4 +15,11 @@ public class RaffleMapper {
                 imageUrl,
                 raffle.getPrice());
     }
+
+    public static Raffle modelToRaffle(RaffleModel raffleModel) {
+        return new Raffle(raffleModel.getId(),
+                raffleModel.getPrice(),
+                raffleModel.getImageUrl(),
+                raffleModel.getName());
+    }
 }

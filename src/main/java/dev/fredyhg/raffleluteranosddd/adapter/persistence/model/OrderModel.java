@@ -15,20 +15,30 @@ public class OrderModel {
 
     @Id
     private String id;
-    @OneToMany(cascade = CascadeType.PERSIST)
+    @OneToMany(mappedBy = "order", cascade = CascadeType.ALL)
     private List<RaffleModel> raffles;
     private LocalDateTime buyAt;
+    private String buyerId;
     private BigDecimal total;
     private OrderStatus status;
 
-    public OrderModel(List<RaffleModel> raffles) {
+    public OrderModel(List<RaffleModel> raffles, String buyerId, String id) {
+        this.id = id;
         this.status = OrderStatus.WAIT_PAYMENT;
         this.buyAt = null;
         this.raffles = raffles;
         this.total = getTotal(raffles);
+        this.buyerId = buyerId;
+        this.setRaffleOrderReference(raffles);
     }
 
     public OrderModel() {
+    }
+
+    private void setRaffleOrderReference(List<RaffleModel> raffles) {
+        for (RaffleModel raffle : raffles) {
+            raffle.setOrder(this);
+        }
     }
 
     public BigDecimal getTotal(List<RaffleModel> raffles) {

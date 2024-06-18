@@ -3,7 +3,7 @@ package dev.fredyhg.raffleluteranosddd.usecase;
 import dev.fredyhg.raffleluteranosddd.adapter.persistence.repository.RaffleRepository;
 import dev.fredyhg.raffleluteranosddd.common.mapper.AvailableRaffleMapper;
 import dev.fredyhg.raffleluteranosddd.domain.models.availableraffle.AvailableRaffle;
-import dev.fredyhg.raffleluteranosddd.domain.models.availableraffle.ReceiveRequestAvailableRafflePortImpl;
+import dev.fredyhg.raffleluteranosddd.domain.models.availableraffle.RequestAvailableRaffleReceiverPortImpl;
 import dev.fredyhg.raffleluteranosddd.domain.models.raffle.Raffle;
 import dev.fredyhg.raffleluteranosddd.infrastructure.http.request.AvailableRafflePostRequest;
 import jakarta.transaction.Transactional;
@@ -17,11 +17,11 @@ import java.util.List;
 public class SaveAvailableRaffleUseCase {
 
     private final SaveRaffleUseCase saveRaffleUseCase;
-    private final ReceiveRequestAvailableRafflePortImpl receiveRequestAvailableRafflePort;
+    private final RequestAvailableRaffleReceiverPortImpl receiveRequestAvailableRafflePort;
     private final RaffleRepository raffleRepository;
 
     @Transactional
-    public void createAvailableRaffle(AvailableRafflePostRequest availableRafflePostRequest ) {
+    public AvailableRaffle createAvailableRaffle(AvailableRafflePostRequest availableRafflePostRequest ) {
 
         availableRafflePostRequest.getRaffles().forEach(raff -> raffleRepository.findByName(raff.getName()).ifPresent(r -> {
             throw new RuntimeException("Raffle with name " + r.getName() + " already exists");
@@ -31,6 +31,6 @@ public class SaveAvailableRaffleUseCase {
 
         AvailableRaffle availableRaffle = AvailableRaffleMapper.toAvailableRaffle(availableRafflePostRequest, validRaffles);
 
-        receiveRequestAvailableRafflePort.save(availableRaffle);
+        return receiveRequestAvailableRafflePort.save(availableRaffle);
     }
 }

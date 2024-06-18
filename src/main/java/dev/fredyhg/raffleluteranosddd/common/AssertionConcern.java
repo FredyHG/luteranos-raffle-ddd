@@ -34,7 +34,7 @@ public class AssertionConcern {
     }
 
     public static void assertArgumentIsEmail(String aString, String aMessage) {
-        Pattern pattern = Pattern.compile("^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$\n");
+        Pattern pattern = Pattern.compile("^[\\w-\\.]+@([\\w-]+\\.)+[\\w-]{2,4}$");
         boolean isEmail = pattern.matcher(aString).find();
 
         if (!isEmail) {

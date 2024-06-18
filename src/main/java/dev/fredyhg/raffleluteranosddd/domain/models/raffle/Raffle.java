@@ -4,6 +4,7 @@ import dev.fredyhg.raffleluteranosddd.common.domain.Aggregate;
 import lombok.Getter;
 
 import java.math.BigDecimal;
+import java.util.List;
 
 import static dev.fredyhg.raffleluteranosddd.common.AssertionConcern.*;
 
@@ -31,7 +32,28 @@ public class Raffle extends Aggregate<RaffleId> {
         this.orderId = null;
     }
 
+    public Raffle(String id, BigDecimal price, String imageBase64, String name) {
+        super(new RaffleId(id));
+        this.price = price;
+        this.imageBase64 = imageBase64;
+        this.name = name;
+    }
+
     public void addOrderId(String orderId) {
         this.orderId = orderId;
+    }
+
+    public static BigDecimal getSumTotal(List<Raffle> raffles) {
+        BigDecimal total = BigDecimal.ZERO;
+        for (Raffle raffle : raffles) {
+            total = total.add(raffle.getPrice());
+        }
+
+        return total;
+    }
+
+    public Raffle setOrderId(String orderId) {
+        this.orderId = orderId;
+        return this;
     }
 }

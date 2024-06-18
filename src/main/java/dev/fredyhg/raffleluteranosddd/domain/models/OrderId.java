@@ -8,4 +8,8 @@ public class OrderId extends Identifier<UUID> {
     protected OrderId() {
         super(UUID.randomUUID());
     }
+
+    public OrderId(String id) {
+        super(UUID.fromString(id));
+    }
 }

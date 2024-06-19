@@ -1,7 +1,7 @@
-package dev.fredyhg.raffleluteranosddd.domain.models.availableraffle;
+package dev.fredyhg.raffleluteranosddd.domain.models.rafflecollection;
 
 import dev.fredyhg.raffleluteranosddd.common.domain.Aggregate;
-import dev.fredyhg.raffleluteranosddd.domain.enums.AvailableRaffleStatus;
+import dev.fredyhg.raffleluteranosddd.domain.enums.RaffleCollectionStatus;
 import dev.fredyhg.raffleluteranosddd.domain.models.raffle.Raffle;
 import lombok.Getter;
 
@@ -12,17 +12,17 @@ import java.util.List;
 import static dev.fredyhg.raffleluteranosddd.common.AssertionConcern.*;
 
 @Getter
-public class AvailableRaffle extends Aggregate<AvailableRaffleId> {
+public class RaffleCollection extends Aggregate<RaffleCollectionId> {
 
     private final String raffleType;
     private final List<Raffle> raffles;
     private final Integer qntRaffle;
     private List<Raffle> availableRaffles = new ArrayList<>();
     private final LocalDateTime createdAt;
-    private final AvailableRaffleStatus status;
+    private final RaffleCollectionStatus status;
 
-    public AvailableRaffle(String raffleType, List<Raffle> raffles) {
-        super(new AvailableRaffleId());
+    public RaffleCollection(String raffleType, List<Raffle> raffles) {
+        super(new RaffleCollectionId());
 
         assertArgumentNotNull(raffleType, "RaffleType cannot be null");
         assertArgumentNotEmpty(raffleType, "RaffleType cannot be empty");
@@ -34,7 +34,7 @@ public class AvailableRaffle extends Aggregate<AvailableRaffleId> {
         this.raffles = raffles;
         this.qntRaffle = raffles.size();
         this.createdAt = LocalDateTime.now();
-        this.status = AvailableRaffleStatus.WAIT_FINISH;
+        this.status = RaffleCollectionStatus.WAIT_FINISH;
 
         if(availableRaffles.isEmpty()) {
             this.availableRaffles = raffles;

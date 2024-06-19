@@ -8,6 +8,7 @@ import dev.fredyhg.raffleluteranosddd.domain.ports.RaffleCollectionPersistPort;
 import dev.fredyhg.raffleluteranosddd.domain.ports.BuyerPersistPort;
 import dev.fredyhg.raffleluteranosddd.domain.ports.OrderPersistPort;
 import dev.fredyhg.raffleluteranosddd.domain.ports.RafflePersistPort;
+import dev.fredyhg.raffleluteranosddd.domain.service.ImageService;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -15,8 +16,8 @@ import org.springframework.context.annotation.Configuration;
 public class BeanConfig {
 
     @Bean
-    public RequestRaffleReceiverPortImpl receiveRequestRafflePortImpl(RafflePersistPort rafflePersistPort) {
-        return new RequestRaffleReceiverPortImpl(rafflePersistPort);
+    public RequestRaffleReceiverPortImpl receiveRequestRafflePortImpl(RafflePersistPort rafflePersistPort, ImageService imageService) {
+        return new RequestRaffleReceiverPortImpl(rafflePersistPort, imageService);
     }
 
     @Bean

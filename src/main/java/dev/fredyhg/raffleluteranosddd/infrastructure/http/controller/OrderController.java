@@ -22,7 +22,7 @@ public class OrderController {
 
     private final CreateOrderUseCase createOrderUseCase;
 
-    @PostMapping("/test")
+    @PostMapping("/create")
     public ResponseEntity<ResponseMessage> createOrder(@RequestBody OrderPostRequest orderPostRequest) {
         createOrderUseCase.save(orderPostRequest);
 

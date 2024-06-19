@@ -1,12 +1,12 @@
 package dev.fredyhg.raffleluteranosddd.infrastructure.http.controller;
 
 import dev.fredyhg.raffleluteranosddd.adapter.persistence.model.RaffleModel;
-import dev.fredyhg.raffleluteranosddd.infrastructure.http.request.AvailableRafflePostRequest;
-import dev.fredyhg.raffleluteranosddd.infrastructure.http.response.AvailableRaffleGetResponse;
+import dev.fredyhg.raffleluteranosddd.infrastructure.http.request.RaffleCollectionPostRequest;
+import dev.fredyhg.raffleluteranosddd.infrastructure.http.response.RaffleCollectionGetRequest;
 import dev.fredyhg.raffleluteranosddd.infrastructure.http.response.ResponseMessage;
-import dev.fredyhg.raffleluteranosddd.usecase.FindAvailableRaffleUseCase;
+import dev.fredyhg.raffleluteranosddd.usecase.FindRaffleCollectionUseCase;
 import dev.fredyhg.raffleluteranosddd.usecase.FindRafflesByRaffleTypeUseCase;
-import dev.fredyhg.raffleluteranosddd.usecase.SaveAvailableRaffleUseCase;
+import dev.fredyhg.raffleluteranosddd.usecase.SaveRaffleCollectionUseCase;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
@@ -23,16 +23,16 @@ import java.time.LocalDateTime;
 @RequestMapping("api/v1/raffle")
 public class RaffleController {
 
-    private final SaveAvailableRaffleUseCase saveAvailableRaffleUseCase;
-    private final FindAvailableRaffleUseCase findAvailableRaffleUseCase;
+    private final SaveRaffleCollectionUseCase saveRaffleCollectionUseCase;
+    private final FindRaffleCollectionUseCase findRaffleCollectionUseCase;
     private final FindRafflesByRaffleTypeUseCase findRafflesByRaffleTypeUseCase;
 
     @PostMapping
-    public ResponseEntity<ResponseMessage> createRaffle(@RequestBody AvailableRafflePostRequest availableRafflePostRequest) {
-        log.info("Receive request to save raffle type with name: {}", availableRafflePostRequest.getRaffleType());
-        log.info("Receive request to save list of raffles with size: {}", availableRafflePostRequest.getRaffles().size());
+    public ResponseEntity<ResponseMessage> createRaffle(@RequestBody RaffleCollectionPostRequest raffleCollectionPostRequest) {
+        log.info("Receive request to save raffle type with name: {}", raffleCollectionPostRequest.getRaffleType());
+        log.info("Receive request to save list of raffles with size: {}", raffleCollectionPostRequest.getRaffles().size());
 
-        saveAvailableRaffleUseCase.createAvailableRaffle(availableRafflePostRequest);
+        saveRaffleCollectionUseCase.createRaffleCollection(raffleCollectionPostRequest);
 
         return ResponseEntity.status(HttpStatus.CREATED).body(ResponseMessage.builder()
                 .message("Raffle created successfully")
@@ -46,9 +46,9 @@ public class RaffleController {
         return ResponseEntity.status(HttpStatus.OK).body(findRafflesByRaffleTypeUseCase.findRafflesByRaffleType(raffleType , pageable));
     }
 
-    @GetMapping("/available-raffles")
-    public ResponseEntity<Page<AvailableRaffleGetResponse>> findAvailableRequest(Pageable pageable) {
-        return ResponseEntity.status(HttpStatus.OK).body(findAvailableRaffleUseCase.findAvailableRaffles(pageable));
+    @GetMapping("/raffle-collection")
+    public ResponseEntity<Page<RaffleCollectionGetRequest>> findAvailableRequest(Pageable pageable) {
+        return ResponseEntity.status(HttpStatus.OK).body(findRaffleCollectionUseCase.findRaffleCollection(pageable));
     }
 
 

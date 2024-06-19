@@ -1,4 +1,4 @@
-package dev.fredyhg.raffleluteranosddd.usecase;
+package dev.fredyhg.raffleluteranosddd.application.usecase;
 
 import dev.fredyhg.raffleluteranosddd.adapter.persistence.model.RaffleModel;
 import dev.fredyhg.raffleluteranosddd.adapter.persistence.repository.RaffleRepository;

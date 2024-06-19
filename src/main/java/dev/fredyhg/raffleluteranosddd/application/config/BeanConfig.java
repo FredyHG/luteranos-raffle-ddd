@@ -1,13 +1,14 @@
 package dev.fredyhg.raffleluteranosddd.application.config;
 
 import dev.fredyhg.raffleluteranosddd.domain.models.RequestOrderReceiverPortImpl;
-import dev.fredyhg.raffleluteranosddd.domain.models.availableraffle.RequestAvailableRaffleReceiverPortImpl;
+import dev.fredyhg.raffleluteranosddd.domain.models.rafflecollection.RaffleCollectionReceiverPortImpl;
 import dev.fredyhg.raffleluteranosddd.domain.models.buyer.BuyerDtoReceiverPortImpl;
 import dev.fredyhg.raffleluteranosddd.domain.models.raffle.RequestRaffleReceiverPortImpl;
-import dev.fredyhg.raffleluteranosddd.domain.ports.AvailableRafflePersistPort;
+import dev.fredyhg.raffleluteranosddd.domain.ports.RaffleCollectionPersistPort;
 import dev.fredyhg.raffleluteranosddd.domain.ports.BuyerPersistPort;
 import dev.fredyhg.raffleluteranosddd.domain.ports.OrderPersistPort;
 import dev.fredyhg.raffleluteranosddd.domain.ports.RafflePersistPort;
+import dev.fredyhg.raffleluteranosddd.domain.service.ImageService;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -15,13 +16,13 @@ import org.springframework.context.annotation.Configuration;
 public class BeanConfig {
 
     @Bean
-    public RequestRaffleReceiverPortImpl receiveRequestRafflePortImpl(RafflePersistPort rafflePersistPort) {
-        return new RequestRaffleReceiverPortImpl(rafflePersistPort);
+    public RequestRaffleReceiverPortImpl receiveRequestRafflePortImpl(RafflePersistPort rafflePersistPort, ImageService imageService) {
+        return new RequestRaffleReceiverPortImpl(rafflePersistPort, imageService);
     }
 
     @Bean
-    public RequestAvailableRaffleReceiverPortImpl receiveRequestAvailableRafflePortImpl(AvailableRafflePersistPort availableRafflePersistPort) {
-        return new RequestAvailableRaffleReceiverPortImpl(availableRafflePersistPort);
+    public RaffleCollectionReceiverPortImpl raffleCollectionReceiverPortImpl(RaffleCollectionPersistPort raffleCollectionPersistPort) {
+        return new RaffleCollectionReceiverPortImpl(raffleCollectionPersistPort);
     }
 
     @Bean

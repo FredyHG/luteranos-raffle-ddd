@@ -7,7 +7,7 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 @Data
-public class AvailableRaffleGetResponse {
+public class RaffleCollectionGetRequest {
     private String id;
     private String raffleType;
     private Integer qntRaffle;
@@ -15,7 +15,7 @@ public class AvailableRaffleGetResponse {
     private LocalDateTime createdAt;
     private String status;
 
-    public AvailableRaffleGetResponse(String id, LocalDateTime createdAt, String status, String raffleType, Integer qntRaffle, List<RaffleModel> availableRaffles) {
+    public RaffleCollectionGetRequest(String id, LocalDateTime createdAt, String status, String raffleType, Integer qntRaffle, List<RaffleModel> availableRaffles) {
         this.id = id;
         this.createdAt = createdAt;
         this.status = status;
@@ -24,6 +24,6 @@ public class AvailableRaffleGetResponse {
         this.availableRaffles = availableRaffles;
     }
 
-    public AvailableRaffleGetResponse() {
+    public RaffleCollectionGetRequest() {
     }
 }

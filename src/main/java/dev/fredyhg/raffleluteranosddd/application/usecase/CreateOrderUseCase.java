@@ -1,4 +1,4 @@
-package dev.fredyhg.raffleluteranosddd.usecase;
+package dev.fredyhg.raffleluteranosddd.application.usecase;
 
 import dev.fredyhg.raffleluteranosddd.adapter.persistence.model.BuyerModel;
 import dev.fredyhg.raffleluteranosddd.adapter.persistence.model.RaffleModel;

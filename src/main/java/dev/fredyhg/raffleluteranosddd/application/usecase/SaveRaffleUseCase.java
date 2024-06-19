@@ -1,4 +1,4 @@
-package dev.fredyhg.raffleluteranosddd.usecase;
+package dev.fredyhg.raffleluteranosddd.application.usecase;
 
 import dev.fredyhg.raffleluteranosddd.common.mapper.RaffleMapper;
 import dev.fredyhg.raffleluteranosddd.domain.models.raffle.Raffle;

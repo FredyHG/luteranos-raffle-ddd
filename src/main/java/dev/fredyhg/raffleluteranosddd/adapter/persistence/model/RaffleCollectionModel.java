@@ -1,6 +1,6 @@
 package dev.fredyhg.raffleluteranosddd.adapter.persistence.model;
 
-import dev.fredyhg.raffleluteranosddd.domain.enums.AvailableRaffleStatus;
+import dev.fredyhg.raffleluteranosddd.domain.enums.RaffleCollectionStatus;
 import jakarta.persistence.*;
 import lombok.Getter;
 
@@ -9,8 +9,8 @@ import java.util.List;
 
 @Getter
 @Entity
-@Table(name = "tb_available_raffle")
-public class AvailableRaffleModel {
+@Table(name = "tb_raffle_collection")
+public class RaffleCollectionModel {
     @Id
     private String id;
     private String raffleType;
@@ -24,9 +24,15 @@ public class AvailableRaffleModel {
     private List<RaffleModel> available;
     private LocalDateTime createdAt;
     @Enumerated(EnumType.STRING)
-    private AvailableRaffleStatus status;
+    private RaffleCollectionStatus status;
 
-    public AvailableRaffleModel(String id, Integer qntRaffle, LocalDateTime createdAt, List<RaffleModel> raffles, String raffleType, AvailableRaffleStatus status, List<RaffleModel> available) {
+    public RaffleCollectionModel(String id,
+                                 Integer qntRaffle,
+                                 LocalDateTime createdAt,
+                                 List<RaffleModel> raffles,
+                                 String raffleType,
+                                 RaffleCollectionStatus status,
+                                 List<RaffleModel> available) {
         this.id = id;
         this.qntRaffle = qntRaffle;
         this.createdAt = createdAt;
@@ -36,5 +42,5 @@ public class AvailableRaffleModel {
         this.available = available;
     }
 
-    protected AvailableRaffleModel() {}
+    protected RaffleCollectionModel() {}
 }

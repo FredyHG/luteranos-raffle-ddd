@@ -1,4 +1,4 @@
-package dev.fredyhg.raffleluteranosddd.usecase;
+package dev.fredyhg.raffleluteranosddd.application.usecase;
 
 import dev.fredyhg.raffleluteranosddd.common.dto.BuyerDto;
 import dev.fredyhg.raffleluteranosddd.common.mapper.BuyerMapper;

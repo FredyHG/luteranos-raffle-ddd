@@ -2,7 +2,7 @@ package dev.fredyhg.raffleluteranosddd.infrastructure.http.controller;
 
 import dev.fredyhg.raffleluteranosddd.infrastructure.http.request.OrderPostRequest;
 import dev.fredyhg.raffleluteranosddd.infrastructure.http.response.ResponseMessage;
-import dev.fredyhg.raffleluteranosddd.usecase.CreateOrderUseCase;
+import dev.fredyhg.raffleluteranosddd.application.usecase.CreateOrderUseCase;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
@@ -24,7 +24,10 @@ public class OrderController {
 
     @PostMapping("/create")
     public ResponseEntity<ResponseMessage> createOrder(@RequestBody OrderPostRequest orderPostRequest) {
-        createOrderUseCase.save(orderPostRequest);
+
+        log.info("Create order with {} raffles", orderPostRequest.getRafflesIds().size());
+
+        createOrderUseCase.createOrder(orderPostRequest);
 
         return ResponseEntity.status(HttpStatus.CREATED).body(ResponseMessage.builder()
                 .status(201)

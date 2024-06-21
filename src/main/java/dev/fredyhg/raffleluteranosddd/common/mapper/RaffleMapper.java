@@ -9,10 +9,10 @@ public class RaffleMapper {
         return new Raffle(raffle.getName(), raffle.getBase64Image(), raffle.getPrice());
     }
 
-    public static RaffleModel toRaffleModel(Raffle raffle, String imageUrl) {
+    public static RaffleModel toRaffleModel(Raffle raffle) {
         return new RaffleModel(raffle.getId().fromValue(),
                 raffle.getName(),
-                imageUrl,
+                raffle.getImageUrl(),
                 raffle.getPrice());
     }
 
@@ -22,4 +22,6 @@ public class RaffleMapper {
                 raffleModel.getImageUrl(),
                 raffleModel.getName());
     }
+
+    private RaffleMapper(){}
 }

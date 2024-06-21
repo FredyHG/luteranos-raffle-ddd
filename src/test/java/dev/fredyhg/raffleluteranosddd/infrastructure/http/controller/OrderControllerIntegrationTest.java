@@ -42,7 +42,7 @@ class OrderControllerIntegrationTest {
     private final Gson gson = new Gson();
 
     @Test
-    void testGet() {
+    void testCreateOrderSuccessfully() {
 
         BuyerModel savedBuyer = buyerRepository.save(BuyerModelFactory.valid());
 

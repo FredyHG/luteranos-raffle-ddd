@@ -10,10 +10,12 @@ import dev.fredyhg.raffleluteranosddd.domain.models.Order;
 import dev.fredyhg.raffleluteranosddd.domain.models.raffle.Raffle;
 import dev.fredyhg.raffleluteranosddd.domain.ports.OrderPersistPort;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
 
+@Slf4j
 @RequiredArgsConstructor
 @Component
 public class OrderPersistPortImpl implements OrderPersistPort {
@@ -29,6 +31,7 @@ public class OrderPersistPortImpl implements OrderPersistPort {
                         () -> new RuntimeException("Raffle not found"))).toList();
 
         OrderModel orderModel = OrderMapper.toModel(order, raffles);
+        log.info("Saving order with id: {}", orderModel.getId());
         OrderModel savedOrder = orderRepository.save(orderModel);
 
         for (RaffleModel raffle : raffles) {

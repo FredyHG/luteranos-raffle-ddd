@@ -21,4 +21,6 @@ public class OrderMapper {
     public static Order toOrder(Buyer buyer, List<Raffle> raffles) {
         return new Order(raffles, buyer.getId().fromValue());
     }
+
+    private OrderMapper(){}
 }

@@ -12,11 +12,13 @@ import dev.fredyhg.raffleluteranosddd.domain.models.raffle.Raffle;
 import dev.fredyhg.raffleluteranosddd.domain.ports.RequestOrderReceiverPort;
 import dev.fredyhg.raffleluteranosddd.infrastructure.http.request.OrderPostRequest;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
 import java.util.Optional;
 
+@Slf4j
 @Component
 @RequiredArgsConstructor
 public class CreateOrderUseCase {
@@ -26,16 +28,18 @@ public class CreateOrderUseCase {
     private final BuyerRepository buyerRepository;
     private final SaveBuyerUseCase saveBuyerUseCase;
 
-    public Order save(OrderPostRequest orderPostRequest) {
+    public Order createOrder(OrderPostRequest orderPostRequest) {
+
+        log.info("Searching buyer with cpf: {}", orderPostRequest.getBuyer().getCpf());
         Optional<BuyerModel> buyerModel = buyerRepository.findByCpf(orderPostRequest.getBuyer().getCpf());
 
+        log.info("Create a buyer if one does not already exist.");
         Buyer buyer = buyerModel.map(BuyerMapper::modelToMapper).orElseGet(() -> saveBuyerUseCase.save(orderPostRequest.getBuyer()));
 
         List<RaffleModel> listOfModels = orderPostRequest.getRafflesIds().stream().map(findRaffleByIdUseCase::findById).toList();
         List<Raffle> listOfRaffle = listOfModels.stream().map(RaffleMapper::modelToRaffle).toList();
 
         Order order = OrderMapper.toOrder(buyer, listOfRaffle);
-
 
         return requestOrderReceiverPort.save(order);
     }

@@ -4,8 +4,8 @@ spring:
 
   datasource:
 #    url: jdbc:postgresql://host.docker.internal:5432/postgres
-    url: jdbc:postgresql://localhost:5432/postgres
-    username: postgres
+    url: jdbc:postgresql://aws-0-sa-east-1.pooler.supabase.com:6543/postgres
+    username: postgres.sgnprjdaqclicbrgaxpx
     password: ${DATABASE_PASSWORD}
     driver-class-name: org.postgresql.Driver
   jpa:

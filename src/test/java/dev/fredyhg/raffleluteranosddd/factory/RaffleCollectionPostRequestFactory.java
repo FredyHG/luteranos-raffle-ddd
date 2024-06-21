@@ -6,14 +6,14 @@ import org.instancio.Model;
 
 import static org.instancio.Select.field;
 
-public class AvailableRafflePostRequestFactory {
+public class RaffleCollectionPostRequestFactory {
 
-    private static final Model<RaffleCollectionPostRequest> AVAILABLE_RAFFLE_POST_REQUEST_MODEL =
+    private static final Model<RaffleCollectionPostRequest> RAFFLE_COLLECTION_POST_REQUEST_MODEL =
             Instancio.of(RaffleCollectionPostRequest.class)
                     .toModel();
 
     public static RaffleCollectionPostRequest withValidName(String name) {
-        return Instancio.of(AVAILABLE_RAFFLE_POST_REQUEST_MODEL)
+        return Instancio.of(RAFFLE_COLLECTION_POST_REQUEST_MODEL)
                 .set(field(RaffleCollectionPostRequest::getRaffleType), name)
                 .create();
     }

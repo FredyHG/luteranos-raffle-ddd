@@ -12,6 +12,7 @@ import static dev.fredyhg.raffleluteranosddd.common.AssertionConcern.*;
 public class Raffle extends Aggregate<RaffleId> {
     private final String name;
     private final String imageBase64;
+    private String imageUrl;
     private final BigDecimal price;
     private String orderId;
 
@@ -54,6 +55,11 @@ public class Raffle extends Aggregate<RaffleId> {
 
     public Raffle setOrderId(String orderId) {
         this.orderId = orderId;
+        return this;
+    }
+
+    public Raffle setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
         return this;
     }
 }

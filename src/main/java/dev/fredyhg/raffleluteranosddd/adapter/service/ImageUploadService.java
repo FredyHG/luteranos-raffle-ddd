@@ -1,5 +1,7 @@
 package dev.fredyhg.raffleluteranosddd.adapter.service;
 
+import dev.fredyhg.raffleluteranosddd.common.dto.ImageResponse;
+
 public interface ImageUploadService {
-    String uploadImage(String base64Image);
+    ImageResponse uploadImage(String base64Image, String title);
 }

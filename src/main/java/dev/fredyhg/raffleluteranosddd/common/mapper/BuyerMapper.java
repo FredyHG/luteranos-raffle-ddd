@@ -20,4 +20,6 @@ public class BuyerMapper {
                 buyerModel.getEmail(),
                 buyerModel.getCpf());
     }
+
+    private BuyerMapper(){}
 }

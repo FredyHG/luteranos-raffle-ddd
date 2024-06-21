@@ -22,7 +22,7 @@ public class RaffleCollectionMapper {
                 raffleCollection.getQntRaffle(),
                 raffleCollection.getCreatedAt(),
                 raffles,
-                raffleCollection.getRaffleType(),
+                raffleCollection.getCollectionName(),
                 raffleCollection.getStatus(),
                 availableRaffles
         );
@@ -33,11 +33,11 @@ public class RaffleCollectionMapper {
                 raffleCollection.getId(),
                 raffleCollection.getCreatedAt(),
                 raffleCollection.getStatus().toString(),
-                raffleCollection.getRaffleType(),
+                raffleCollection.getCollectionName(),
                 raffleCollection.getQntRaffle(),
                 raffleCollection.getAvailable()
         );
     }
 
-
+    private RaffleCollectionMapper(){}
 }

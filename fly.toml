@@ -14,6 +14,9 @@ primary_region = 'gig'
   min_machines_running = 0
   processes = ['app']
 
+[build]
+dockerfile = "docker/Dockerfile"
+
 [[vm]]
   memory = '1gb'
   cpu_kind = 'shared'

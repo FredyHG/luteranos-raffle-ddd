@@ -17,10 +17,10 @@ public class FindRafflesByRaffleTypeUseCase {
     private final RaffleRepository raffleRepository;
     private final RaffleCollectionRepository raffleCollectionRepository;
 
-    public Page<RaffleModel> findRafflesByRaffleType(String typeRaffle, Pageable pageable){
+    public Page<RaffleModel> findRafflesByCollectionName(String collectionName, Pageable pageable){
 
         RaffleCollectionModel raffleCollection = raffleCollectionRepository
-                .findByCollectionName(typeRaffle).orElseThrow(
+                .findByCollectionName(collectionName).orElseThrow(
                         () -> new RaffleNotFoundException("Raffle not found"));
 
         return raffleRepository.findByRaffleId(raffleCollection.getId(), pageable);

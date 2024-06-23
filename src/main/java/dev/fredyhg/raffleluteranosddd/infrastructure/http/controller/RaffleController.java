@@ -43,7 +43,7 @@ public class RaffleController {
 
     @GetMapping("/{collectionName}")
     public ResponseEntity<Page<RaffleModel>> findAvailableRequest(@PathVariable String collectionName, Pageable pageable) {
-        return ResponseEntity.status(HttpStatus.OK).body(findRafflesByRaffleTypeUseCase.findRafflesByRaffleType(collectionName , pageable));
+        return ResponseEntity.status(HttpStatus.OK).body(findRafflesByRaffleTypeUseCase.findRafflesByCollectionName(collectionName , pageable));
     }
 
     @GetMapping("/raffle-collection")

@@ -41,9 +41,9 @@ public class RaffleController {
                 .build());
     }
 
-    @GetMapping("/{raffleType}")
-    public ResponseEntity<Page<RaffleModel>> findAvailableRequest(@PathVariable String raffleType, Pageable pageable) {
-        return ResponseEntity.status(HttpStatus.OK).body(findRafflesByRaffleTypeUseCase.findRafflesByRaffleType(raffleType , pageable));
+    @GetMapping("/{collectionName}")
+    public ResponseEntity<Page<RaffleModel>> findAvailableRequest(@PathVariable String collectionName, Pageable pageable) {
+        return ResponseEntity.status(HttpStatus.OK).body(findRafflesByRaffleTypeUseCase.findRafflesByRaffleType(collectionName , pageable));
     }
 
     @GetMapping("/raffle-collection")

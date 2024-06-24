@@ -92,6 +92,27 @@ class RaffleControllerTest {
     }
 
     @Test
+    void testGetRaffleSuccessfullyByCollectionName() {
+
+        RaffleCollectionModel raffleCollection = RaffleCollectionModelFactory.withEmptyRaffles("Test");
+        RaffleModel raffleModel = new RaffleModel(UUID.randomUUID().toString(), "Raffle Name", "121", BigDecimal.ONE);
+
+        RaffleModel savedRaffle = raffleRepository.save(raffleModel);
+        raffleCollection.setRaffles(List.of(savedRaffle));
+
+        raffleCollectionRepository.save(raffleCollection);
+
+        given()
+                .port(port)
+                .header("Content-type", "application/json")
+                .and()
+                .get("/api/v1/raffle/" + raffleCollection.getCollectionName())
+                .then()
+                .statusCode(200)
+                .body("content", hasSize(1));
+    }
+
+    @Test
     void testGetRaffleSuccessfully() {
 
         RaffleCollectionModel raffleCollection = RaffleCollectionModelFactory.withEmptyRaffles("Test");

@@ -5,7 +5,7 @@ import dev.fredyhg.raffleluteranosddd.infrastructure.http.request.RaffleCollecti
 import dev.fredyhg.raffleluteranosddd.infrastructure.http.response.RaffleCollectionGetRequest;
 import dev.fredyhg.raffleluteranosddd.infrastructure.http.response.ResponseMessage;
 import dev.fredyhg.raffleluteranosddd.application.usecase.FindRaffleCollectionUseCase;
-import dev.fredyhg.raffleluteranosddd.application.usecase.FindRafflesByRaffleTypeUseCase;
+import dev.fredyhg.raffleluteranosddd.application.usecase.FindRafflesByCollentionNameUseCase;
 import dev.fredyhg.raffleluteranosddd.application.usecase.SaveRaffleCollectionUseCase;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -24,8 +24,7 @@ import java.time.LocalDateTime;
 public class RaffleController {
 
     private final SaveRaffleCollectionUseCase saveRaffleCollectionUseCase;
-    private final FindRaffleCollectionUseCase findRaffleCollectionUseCase;
-    private final FindRafflesByRaffleTypeUseCase findRafflesByRaffleTypeUseCase;
+    private final FindRafflesByCollentionNameUseCase findRafflesByCollentionNameUseCase;
 
     @PostMapping
     public ResponseEntity<ResponseMessage> createRaffle(@RequestBody RaffleCollectionPostRequest raffleCollectionPostRequest) {
@@ -43,13 +42,9 @@ public class RaffleController {
 
     @GetMapping("/{collectionName}")
     public ResponseEntity<Page<RaffleModel>> findAvailableRequest(@PathVariable String collectionName, Pageable pageable) {
-        return ResponseEntity.status(HttpStatus.OK).body(findRafflesByRaffleTypeUseCase.findRafflesByRaffleType(collectionName , pageable));
+        return ResponseEntity.status(HttpStatus.OK).body(findRafflesByCollentionNameUseCase.findRafflesByCollectionName(collectionName , pageable));
     }
 
-    @GetMapping("/raffle-collection")
-    public ResponseEntity<Page<RaffleCollectionGetRequest>> findAvailableRequest(Pageable pageable) {
-        return ResponseEntity.status(HttpStatus.OK).body(findRaffleCollectionUseCase.findRaffleCollection(pageable));
-    }
 
 
 }

@@ -12,7 +12,7 @@ import org.springframework.stereotype.Component;
 
 @Component
 @RequiredArgsConstructor
-public class FindRafflesByRaffleTypeUseCase {
+public class FindRafflesByCollentionNameUseCase {
 
     private final RaffleRepository raffleRepository;
     private final RaffleCollectionRepository raffleCollectionRepository;

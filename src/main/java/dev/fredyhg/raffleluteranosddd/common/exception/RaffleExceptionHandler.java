@@ -1,4 +1,4 @@
-package dev.fredyhg.raffleluteranosddd.infrastructure.http.exception;
+package dev.fredyhg.raffleluteranosddd.common.exception;
 
 import dev.fredyhg.raffleluteranosddd.infrastructure.http.response.ErrorResponse;
 import lombok.extern.slf4j.Slf4j;
@@ -16,7 +16,6 @@ import java.util.Map;
 public class RaffleExceptionHandler {
 
     private static final Map<String, HttpStatus> statusTable = new HashMap<>();
-
 
     @ExceptionHandler(RaffleException.class)
     public ResponseEntity<ErrorResponse> handleRaffleException(RaffleException ex){
@@ -42,6 +41,7 @@ public class RaffleExceptionHandler {
 
         // HTTP STATUS 409
         statusTable.put(RaffleAlreadyExistsException.class.getSimpleName(), HttpStatus.CONFLICT);
+        statusTable.put(RaffleWinnerAlreadyExistsException.class.getSimpleName(), HttpStatus.CONFLICT);
 
         // HTTP STATUS 404
         statusTable.put(RaffleNotFoundException.class.getSimpleName(), HttpStatus.NOT_FOUND);

@@ -4,7 +4,7 @@ import dev.fredyhg.raffleluteranosddd.adapter.persistence.model.RaffleCollection
 import dev.fredyhg.raffleluteranosddd.adapter.persistence.model.RaffleModel;
 import dev.fredyhg.raffleluteranosddd.adapter.persistence.repository.RaffleCollectionRepository;
 import dev.fredyhg.raffleluteranosddd.adapter.persistence.repository.RaffleRepository;
-import dev.fredyhg.raffleluteranosddd.infrastructure.http.exception.RaffleNotFoundException;
+import dev.fredyhg.raffleluteranosddd.common.exception.RaffleNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;

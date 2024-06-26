@@ -1,4 +1,4 @@
-package dev.fredyhg.raffleluteranosddd.infrastructure.http.exception;
+package dev.fredyhg.raffleluteranosddd.common.exception;
 
 import dev.fredyhg.raffleluteranosddd.infrastructure.http.response.ErrorResponse;
 import lombok.extern.slf4j.Slf4j;
@@ -13,13 +13,12 @@ import java.util.Map;
 
 @Slf4j
 @RestControllerAdvice
-public class RaffleExceptionHandler {
-
+public class RaffleCollectionExceptionHandler {
     private static final Map<String, HttpStatus> statusTable = new HashMap<>();
 
 
-    @ExceptionHandler(RaffleException.class)
-    public ResponseEntity<ErrorResponse> handleRaffleException(RaffleException ex){
+    @ExceptionHandler(RaffleCollectionException.class)
+    public ResponseEntity<ErrorResponse> handleRaffleException(RaffleCollectionException ex){
         log.error("Exception handled: {}", ex.getMessage(), ex);
 
         HttpStatus status = mapStatus(ex);
@@ -34,16 +33,13 @@ public class RaffleExceptionHandler {
         return new ResponseEntity<>(responseMessage, status);
     }
 
-    private HttpStatus mapStatus(RaffleException ex) {
+    private HttpStatus mapStatus(RaffleCollectionException ex) {
         return statusTable.getOrDefault(ex.getClass().getSimpleName(), HttpStatus.INTERNAL_SERVER_ERROR);
     }
 
     static {
 
-        // HTTP STATUS 409
-        statusTable.put(RaffleAlreadyExistsException.class.getSimpleName(), HttpStatus.CONFLICT);
-
         // HTTP STATUS 404
-        statusTable.put(RaffleNotFoundException.class.getSimpleName(), HttpStatus.NOT_FOUND);
+        statusTable.put(RaffleCollectionNotFoundException.class.getSimpleName(), HttpStatus.NOT_FOUND);
     }
 }

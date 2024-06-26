@@ -1,4 +1,4 @@
-package dev.fredyhg.raffleluteranosddd.infrastructure.http.exception;
+package dev.fredyhg.raffleluteranosddd.common.exception;
 
 public class RaffleCollectionException extends RuntimeException {
     public RaffleCollectionException(String msg) {

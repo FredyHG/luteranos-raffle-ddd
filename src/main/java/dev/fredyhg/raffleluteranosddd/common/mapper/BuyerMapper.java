@@ -14,11 +14,23 @@ public class BuyerMapper {
         return new BuyerModel(buyer.getId().fromValue(), buyer.getEmail(), buyer.getName(), buyer.getCpf());
     }
 
-    public static Buyer modelToMapper(BuyerModel buyerModel) {
+    public static Buyer modelToBuyer(BuyerModel buyerModel) {
         return new Buyer(buyerModel.getId(),
                 buyerModel.getName(),
                 buyerModel.getEmail(),
                 buyerModel.getCpf());
+    }
+
+    public static BuyerDto buyerToDto(Buyer buyer) {
+        return new BuyerDto(buyer.getName(),
+                buyer.getEmail(),
+                buyer.getCpf());
+    }
+
+    public static BuyerDto modelToDto(BuyerModel buyer) {
+        return new BuyerDto(buyer.getName(),
+                buyer.getEmail(),
+                buyer.getCpf());
     }
 
     private BuyerMapper(){}

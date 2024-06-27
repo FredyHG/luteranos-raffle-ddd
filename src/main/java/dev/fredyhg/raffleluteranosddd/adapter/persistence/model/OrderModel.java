@@ -2,14 +2,16 @@ package dev.fredyhg.raffleluteranosddd.adapter.persistence.model;
 
 import dev.fredyhg.raffleluteranosddd.domain.enums.OrderStatus;
 import jakarta.persistence.*;
-import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.List;
 
 @Entity
-@Data
+@Getter
+@Setter
 @Table(name = "tb_order")
 public class OrderModel {
 

@@ -28,6 +28,10 @@ public class RaffleCollectionModel {
     @Enumerated(EnumType.STRING)
     private RaffleCollectionStatus status;
 
+    @ManyToOne
+    @JoinColumn(name = "buyer_id")
+    private BuyerModel winner;
+
     public RaffleCollectionModel(String id,
                                  Integer qntRaffle,
                                  LocalDateTime createdAt,

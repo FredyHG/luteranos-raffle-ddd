@@ -1,6 +1,7 @@
 package dev.fredyhg.raffleluteranosddd.domain.models.rafflecollection;
 
 import dev.fredyhg.raffleluteranosddd.common.domain.Aggregate;
+import dev.fredyhg.raffleluteranosddd.common.exception.RaffleWinnerAlreadyExistsException;
 import dev.fredyhg.raffleluteranosddd.domain.enums.RaffleCollectionStatus;
 import dev.fredyhg.raffleluteranosddd.domain.models.raffle.Raffle;
 import lombok.Getter;
@@ -8,6 +9,7 @@ import lombok.Getter;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 import static dev.fredyhg.raffleluteranosddd.common.AssertionConcern.*;
 
@@ -18,8 +20,9 @@ public class RaffleCollection extends Aggregate<RaffleCollectionId> {
     private final List<Raffle> raffles;
     private final Integer qntRaffle;
     private List<Raffle> availableRaffles = new ArrayList<>();
+    private String orderWinner;
     private final LocalDateTime createdAt;
-    private final RaffleCollectionStatus status;
+    private RaffleCollectionStatus status;
 
     public RaffleCollection(String collectionName, List<Raffle> raffles) {
         super(new RaffleCollectionId());
@@ -39,5 +42,39 @@ public class RaffleCollection extends Aggregate<RaffleCollectionId> {
         if(availableRaffles.isEmpty()) {
             this.availableRaffles = raffles;
         }
+    }
+
+    public RaffleCollection(String id,
+                            String collectionName,
+                            List<Raffle> raffles,
+                            Integer qntRaffle,
+                            LocalDateTime createdAt,
+                            RaffleCollectionStatus status,
+                            List<Raffle> availableRaffles) {
+
+        super(new RaffleCollectionId(id));
+
+        this.collectionName = collectionName;
+        this.raffles = raffles;
+        this.qntRaffle = qntRaffle;
+        this.createdAt = createdAt;
+        this.status = status;
+        this.availableRaffles = availableRaffles;
+    }
+
+    public RaffleCollection genOrderWinner(){
+
+        if(orderWinner != null) {
+            throw new RaffleWinnerAlreadyExistsException("This raffle already has a winner");
+        }
+
+        Random random = new Random();
+        int winnerIndex = random.nextInt(raffles.size());
+
+        this.orderWinner = raffles.get(winnerIndex).getOrderId();
+
+        this.status = RaffleCollectionStatus.FINISH;
+
+        return this;
     }
 }

@@ -1,11 +1,11 @@
 package dev.fredyhg.raffleluteranosddd.application.usecase;
 
 import dev.fredyhg.raffleluteranosddd.adapter.persistence.repository.RaffleRepository;
+import dev.fredyhg.raffleluteranosddd.common.exception.RaffleAlreadyExistsException;
 import dev.fredyhg.raffleluteranosddd.common.mapper.RaffleCollectionMapper;
+import dev.fredyhg.raffleluteranosddd.domain.models.raffle.Raffle;
 import dev.fredyhg.raffleluteranosddd.domain.models.rafflecollection.RaffleCollection;
 import dev.fredyhg.raffleluteranosddd.domain.models.rafflecollection.RaffleCollectionReceiverPortImpl;
-import dev.fredyhg.raffleluteranosddd.domain.models.raffle.Raffle;
-import dev.fredyhg.raffleluteranosddd.infrastructure.http.exception.RaffleAlreadyExistsException;
 import dev.fredyhg.raffleluteranosddd.infrastructure.http.request.RaffleCollectionPostRequest;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;

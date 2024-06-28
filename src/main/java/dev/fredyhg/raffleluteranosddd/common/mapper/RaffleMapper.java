@@ -13,14 +13,16 @@ public class RaffleMapper {
         return new RaffleModel(raffle.getId().fromValue(),
                 raffle.getName(),
                 raffle.getImageUrl(),
-                raffle.getPrice());
+                raffle.getPrice(),
+                raffle.isAvailable());
     }
 
     public static Raffle modelToRaffle(RaffleModel raffleModel) {
         return new Raffle(raffleModel.getId(),
                 raffleModel.getPrice(),
                 raffleModel.getImageUrl(),
-                raffleModel.getName());
+                raffleModel.getName(),
+                raffleModel.isAvailable());
     }
 
     private RaffleMapper(){}

@@ -20,10 +20,6 @@ public class RaffleCollectionModel {
     @JoinColumn(name = "raffle_id")
     private List<RaffleModel> raffles;
     private Integer qntRaffle;
-
-    @OneToMany
-    @JoinColumn(name = "raffle_id")
-    private List<RaffleModel> available;
     private LocalDateTime createdAt;
     @Enumerated(EnumType.STRING)
     private RaffleCollectionStatus status;
@@ -37,15 +33,13 @@ public class RaffleCollectionModel {
                                  LocalDateTime createdAt,
                                  List<RaffleModel> raffles,
                                  String collectionName,
-                                 RaffleCollectionStatus status,
-                                 List<RaffleModel> available) {
+                                 RaffleCollectionStatus status) {
         this.id = id;
         this.qntRaffle = qntRaffle;
         this.createdAt = createdAt;
         this.raffles = raffles;
         this.collectionName = collectionName;
         this.status = status;
-        this.available = available;
     }
 
     protected RaffleCollectionModel() {}

@@ -28,6 +28,6 @@ public class FindOrderByIdPortImpl implements FindOrderByIdPort {
 
         List<Raffle> listOfRaffle = order.getRaffles().stream().map(RaffleMapper::modelToRaffle).toList();
 
-        return OrderMapper.modelToOrder(order, listOfRaffle);
+        return OrderMapper.modelToOrder(order, listOfRaffle, order.getCollectionId());
     }
 }

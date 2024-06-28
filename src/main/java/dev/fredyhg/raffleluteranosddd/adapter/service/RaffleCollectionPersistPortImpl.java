@@ -26,11 +26,7 @@ public class RaffleCollectionPersistPortImpl implements RaffleCollectionPersistP
                         raffleRepository.findById(raffle.getId().fromValue()).orElseThrow(() -> new RuntimeException("Raffle not found")))
                 .toList();
 
-        List<RaffleModel> availableRaffles = raffleCollection.getAvailableRaffles().stream().map(raffle ->
-                        raffleRepository.findById(raffle.getId().fromValue()).orElseThrow(() -> new RuntimeException("Raffle not found")))
-                .toList();
-
-        RaffleCollectionModel raffleCollectionModel = RaffleCollectionMapper.toModel(raffleCollection, raffles, availableRaffles);
+        RaffleCollectionModel raffleCollectionModel = RaffleCollectionMapper.toModel(raffleCollection, raffles);
 
         raffleCollectionRepository.save(raffleCollectionModel);
     }

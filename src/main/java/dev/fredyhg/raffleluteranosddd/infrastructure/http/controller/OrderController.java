@@ -1,8 +1,9 @@
 package dev.fredyhg.raffleluteranosddd.infrastructure.http.controller;
 
+import dev.fredyhg.raffleluteranosddd.application.usecase.CreateOrderUseCase;
 import dev.fredyhg.raffleluteranosddd.infrastructure.http.request.OrderPostRequest;
 import dev.fredyhg.raffleluteranosddd.infrastructure.http.response.ResponseMessage;
-import dev.fredyhg.raffleluteranosddd.application.usecase.CreateOrderUseCase;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
@@ -23,7 +24,7 @@ public class OrderController {
     private final CreateOrderUseCase createOrderUseCase;
 
     @PostMapping("/create")
-    public ResponseEntity<ResponseMessage> createOrder(@RequestBody OrderPostRequest orderPostRequest) {
+    public ResponseEntity<ResponseMessage> createOrder(@RequestBody @Valid OrderPostRequest orderPostRequest) {
 
         log.info("Create order with {} raffles", orderPostRequest.getRafflesIds().size());
 

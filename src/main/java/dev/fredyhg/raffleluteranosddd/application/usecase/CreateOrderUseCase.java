@@ -34,12 +34,12 @@ public class CreateOrderUseCase {
         Optional<BuyerModel> buyerModel = buyerRepository.findByCpf(orderPostRequest.getBuyer().getCpf());
 
         log.info("Create a buyer if one does not already exist.");
-        Buyer buyer = buyerModel.map(BuyerMapper::modelToMapper).orElseGet(() -> saveBuyerUseCase.save(orderPostRequest.getBuyer()));
+        Buyer buyer = buyerModel.map(BuyerMapper::modelToBuyer).orElseGet(() -> saveBuyerUseCase.save(orderPostRequest.getBuyer()));
 
         List<RaffleModel> listOfModels = orderPostRequest.getRafflesIds().stream().map(findRaffleByIdUseCase::findById).toList();
         List<Raffle> listOfRaffle = listOfModels.stream().map(RaffleMapper::modelToRaffle).toList();
 
-        Order order = OrderMapper.toOrder(buyer, listOfRaffle);
+        Order order = OrderMapper.toOrder(buyer, listOfRaffle, orderPostRequest.getCollectionId());
 
         return requestOrderReceiverPort.save(order);
     }

@@ -1,12 +1,10 @@
 package dev.fredyhg.raffleluteranosddd.infrastructure.http.controller;
 
 import dev.fredyhg.raffleluteranosddd.adapter.persistence.model.RaffleModel;
-import dev.fredyhg.raffleluteranosddd.infrastructure.http.request.RaffleCollectionPostRequest;
-import dev.fredyhg.raffleluteranosddd.infrastructure.http.response.RaffleCollectionGetRequest;
-import dev.fredyhg.raffleluteranosddd.infrastructure.http.response.ResponseMessage;
-import dev.fredyhg.raffleluteranosddd.application.usecase.FindRaffleCollectionUseCase;
-import dev.fredyhg.raffleluteranosddd.application.usecase.FindRafflesByCollentionNameUseCase;
+import dev.fredyhg.raffleluteranosddd.application.usecase.FindRafflesByCollectionNameUseCase;
 import dev.fredyhg.raffleluteranosddd.application.usecase.SaveRaffleCollectionUseCase;
+import dev.fredyhg.raffleluteranosddd.infrastructure.http.request.RaffleCollectionPostRequest;
+import dev.fredyhg.raffleluteranosddd.infrastructure.http.response.ResponseMessage;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
@@ -24,11 +22,11 @@ import java.time.LocalDateTime;
 public class RaffleController {
 
     private final SaveRaffleCollectionUseCase saveRaffleCollectionUseCase;
-    private final FindRafflesByCollentionNameUseCase findRafflesByCollentionNameUseCase;
+    private final FindRafflesByCollectionNameUseCase findRafflesByCollectionNameUseCase;
 
     @PostMapping
     public ResponseEntity<ResponseMessage> createRaffle(@RequestBody RaffleCollectionPostRequest raffleCollectionPostRequest) {
-        log.info("Receive request to save raffle type with name: {}", raffleCollectionPostRequest.getRaffleType());
+        log.info("Receive request to save raffle type with name: {}", raffleCollectionPostRequest.getCollectionName());
         log.info("Receive request to save list of raffles with size: {}", raffleCollectionPostRequest.getRaffles().size());
 
         saveRaffleCollectionUseCase.createRaffleCollection(raffleCollectionPostRequest);
@@ -42,7 +40,7 @@ public class RaffleController {
 
     @GetMapping("/{collectionName}")
     public ResponseEntity<Page<RaffleModel>> findAvailableRequest(@PathVariable String collectionName, Pageable pageable) {
-        return ResponseEntity.status(HttpStatus.OK).body(findRafflesByCollentionNameUseCase.findRafflesByCollectionName(collectionName , pageable));
+        return ResponseEntity.status(HttpStatus.OK).body(findRafflesByCollectionNameUseCase.findRafflesByCollectionName(collectionName , pageable));
     }
 
 

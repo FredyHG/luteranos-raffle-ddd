@@ -15,6 +15,7 @@ public class Raffle extends Aggregate<RaffleId> {
     private String imageUrl;
     private final BigDecimal price;
     private String orderId;
+    private boolean available;
 
     public Raffle(String name, String imageBase64, BigDecimal price) {
         super(new RaffleId());
@@ -31,17 +32,15 @@ public class Raffle extends Aggregate<RaffleId> {
         this.imageBase64 = imageBase64;
         this.price = price;
         this.orderId = null;
+        this.available = true;
     }
 
-    public Raffle(String id, BigDecimal price, String imageBase64, String name) {
+    public Raffle(String id, BigDecimal price, String imageBase64, String name, boolean available) {
         super(new RaffleId(id));
         this.price = price;
         this.imageBase64 = imageBase64;
         this.name = name;
-    }
-
-    public void addOrderId(String orderId) {
-        this.orderId = orderId;
+        this.available = available;
     }
 
     public static BigDecimal getSumTotal(List<Raffle> raffles) {
@@ -53,13 +52,13 @@ public class Raffle extends Aggregate<RaffleId> {
         return total;
     }
 
-    public Raffle setOrderId(String orderId) {
-        this.orderId = orderId;
+    public Raffle setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
         return this;
     }
 
-    public Raffle setImageUrl(String imageUrl) {
-        this.imageUrl = imageUrl;
+    public Raffle removeAvailable() {
+        this.available = false;
         return this;
     }
 }

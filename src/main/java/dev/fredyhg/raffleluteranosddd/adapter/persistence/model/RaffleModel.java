@@ -18,12 +18,14 @@ public class RaffleModel {
     @ManyToOne
     @JoinColumn(name = "order_id")
     private OrderModel order;
+    private boolean available;
 
-    public RaffleModel(String id, String name, String imageUrl, BigDecimal price) {
+    public RaffleModel(String id, String name, String imageUrl, BigDecimal price, boolean available) {
         this.id = id;
         this.name = name;
         this.imageUrl = imageUrl;
         this.price = price;
+        this.available = available;
     }
 
     protected RaffleModel() {

@@ -14,7 +14,7 @@ public class RaffleCollectionPostRequestFactory {
 
     public static RaffleCollectionPostRequest withValidName(String name) {
         return Instancio.of(RAFFLE_COLLECTION_POST_REQUEST_MODEL)
-                .set(field(RaffleCollectionPostRequest::getRaffleType), name)
+                .set(field(RaffleCollectionPostRequest::getCollectionName), name)
                 .create();
     }
 

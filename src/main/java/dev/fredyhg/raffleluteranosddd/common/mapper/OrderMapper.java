@@ -10,16 +10,16 @@ import java.util.List;
 
 public class OrderMapper {
 
-    public static Order modelToOrder(OrderModel orderModel, List<Raffle> raffles) {
-        return new Order(orderModel.getId(), orderModel.getTotal(), orderModel.getStatus(), orderModel.getBuyAt(), orderModel.getBuyerId(), raffles);
+    public static Order modelToOrder(OrderModel orderModel, List<Raffle> raffles, String collectionId) {
+        return new Order(collectionId, orderModel.getId(), orderModel.getTotal(), orderModel.getStatus(), orderModel.getBuyAt(), orderModel.getBuyerId(), raffles);
     }
 
     public static OrderModel toModel(Order order, List<RaffleModel> raffles) {
-        return new OrderModel(raffles, order.getBuyerId(), order.getId().fromValue());
+        return new OrderModel(raffles, order.getBuyerId(), order.getId().fromValue(), order.getCollectionId());
     }
 
-    public static Order toOrder(Buyer buyer, List<Raffle> raffles) {
-        return new Order(raffles, buyer.getId().fromValue());
+    public static Order toOrder(Buyer buyer, List<Raffle> raffles, String collectionId) {
+        return new Order(raffles, buyer.getId().fromValue(), collectionId);
     }
 
     private OrderMapper(){}

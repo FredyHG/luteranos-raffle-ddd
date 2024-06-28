@@ -11,24 +11,29 @@ import java.util.List;
 
 @Getter
 public class Order extends Aggregate<OrderId> {
+    private final String collectionId;
     private List<Raffle> raffles;
     private final String buyerId;
     private final LocalDateTime orderDate;
     private final BigDecimal total;
     private OrderStatus status;
 
-    public Order(List<Raffle> raffles, String buyerId) {
+    public Order(List<Raffle> raffles, String buyerId, String collectionId) {
         super(new OrderId());
 
+        this.collectionId = collectionId;
         this.raffles = raffles;
         this.status = OrderStatus.WAIT_PAYMENT;
         this.total = Raffle.getSumTotal(raffles);
         this.orderDate = LocalDateTime.now();
         this.buyerId = buyerId;
+
+        this.raffles.forEach(Raffle::removeAvailable);
     }
 
-    public Order(String id, BigDecimal total, OrderStatus status, LocalDateTime orderDate, String buyerId, List<Raffle> raffles) {
+    public Order(String collectionId, String id, BigDecimal total, OrderStatus status, LocalDateTime orderDate, String buyerId, List<Raffle> raffles) {
         super(new OrderId(id));
+        this.collectionId = collectionId;
         this.total = total;
         this.status = status;
         this.orderDate = orderDate;

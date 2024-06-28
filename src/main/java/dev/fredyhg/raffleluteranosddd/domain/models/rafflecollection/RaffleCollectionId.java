@@ -8,4 +8,8 @@ public class RaffleCollectionId extends Identifier<UUID> {
     protected RaffleCollectionId() {
         super(UUID.randomUUID());
     }
+
+    protected RaffleCollectionId(String id) {
+        super(UUID.fromString(id));
+    }
 }

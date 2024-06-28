@@ -9,7 +9,6 @@ import dev.fredyhg.raffleluteranosddd.adapter.persistence.repository.RaffleColle
 import dev.fredyhg.raffleluteranosddd.common.exception.BuyerNotFoundException;
 import dev.fredyhg.raffleluteranosddd.common.exception.OrderNotFoundException;
 import dev.fredyhg.raffleluteranosddd.common.exception.RaffleCollectionException;
-import dev.fredyhg.raffleluteranosddd.common.mapper.RaffleCollectionMapper;
 import dev.fredyhg.raffleluteranosddd.domain.models.rafflecollection.RaffleCollection;
 import dev.fredyhg.raffleluteranosddd.domain.ports.RaffleCollectionWithWinnerPersistPort;
 import lombok.RequiredArgsConstructor;
@@ -22,6 +21,7 @@ public class RaffleCollectionWithWinnerPersistPortImpl implements RaffleCollecti
     private final RaffleCollectionRepository raffleCollectionRepository;
     private final OrderRepository orderRepository;
     private final BuyerRepository buyerRepository;
+
     @Override
     public RaffleCollection persistWithWinner(RaffleCollection raffleCollection) {
 

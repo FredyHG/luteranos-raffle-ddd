@@ -28,6 +28,11 @@ public class RaffleModel {
         this.available = available;
     }
 
+    public RaffleModel toggleSold() {
+        this.available = false;
+        return this;
+    }
+
     protected RaffleModel() {
     }
 }

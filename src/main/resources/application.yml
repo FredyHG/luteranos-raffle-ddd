@@ -4,19 +4,16 @@ spring:
 
   datasource:
     url: jdbc:postgresql://aws-0-sa-east-1.pooler.supabase.com:6543/postgres?prepareThreshold=0
-#    url: jdbc:postgresql://tgdxaqvxfkoyqvlopbok.supabase.co:6543/postgres
-#    username: postgres.sgnprjdaqclicbrgaxpx
+    username: ${DATABASE_USERNAME}
     password: ${DATABASE_PASSWORD}
     driver-class-name: org.postgresql.Driver
-    username: postgres.tgdxaqvxfkoyqvlopbok
   jpa:
-    database-platform: org.hibernate.dialect.PostgreSQLDialect
     hibernate:
       ddl-auto: update
 app:
   imgur:
     url: https://api.imgur.com
-    client-id: 9522ec40ca7240c
+    client-id: ${IMGUR_CLIENT_ID}
   mercadopago:
     type-token: Bearer
-    api-key: toke
+    api-key: ${MP_API_KEY}

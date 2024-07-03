@@ -2,6 +2,8 @@ package dev.fredyhg.raffleluteranosddd.infrastructure.http.controller;
 
 import dev.fredyhg.raffleluteranosddd.application.usecase.CreateOrderUseCase;
 import dev.fredyhg.raffleluteranosddd.infrastructure.http.request.OrderPostRequest;
+import dev.fredyhg.raffleluteranosddd.infrastructure.http.response.BuyRaffleResponse;
+import dev.fredyhg.raffleluteranosddd.infrastructure.http.response.MercadoPagoResponse;
 import dev.fredyhg.raffleluteranosddd.infrastructure.http.response.ResponseMessage;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -24,17 +26,18 @@ public class OrderController {
     private final CreateOrderUseCase createOrderUseCase;
 
     @PostMapping("/create")
-    public ResponseEntity<ResponseMessage> createOrder(@RequestBody @Valid OrderPostRequest orderPostRequest) {
+    public ResponseEntity<BuyRaffleResponse> createOrder(@RequestBody @Valid OrderPostRequest orderPostRequest) {
 
         log.info("Create order with {} raffles", orderPostRequest.getRafflesIds().size());
 
-        createOrderUseCase.createOrder(orderPostRequest);
+        return ResponseEntity.status(HttpStatus.CREATED).body(createOrderUseCase.createOrder(orderPostRequest));
+    }
 
-        return ResponseEntity.status(HttpStatus.CREATED).body(ResponseMessage.builder()
-                .status(201)
-                .message("Order created successfully")
-                .timestamp(LocalDateTime.now())
-                .build());
+    @PostMapping("/payment-callback")
+    public ResponseEntity<String> paymentCallBack(@RequestBody MercadoPagoResponse mercadoPagoResponse) {
+        log.info("receive call back with id");
+
+        return ResponseEntity.status(HttpStatus.OK).body("OK");
     }
 
 }

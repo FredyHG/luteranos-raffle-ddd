@@ -7,6 +7,8 @@ plugins {
 group = "dev.fredyhg"
 version = "0.0.1-SNAPSHOT"
 
+val jjwtVersion = "0.12.6"
+
 java {
     sourceCompatibility = JavaVersion.VERSION_17
 }
@@ -27,11 +29,10 @@ dependencies {
     implementation("org.springframework.boot:spring-boot-starter-validation")
     implementation("org.springframework.cloud:spring-cloud-starter-openfeign:4.1.2")
     implementation("com.mercadopago:sdk-java:2.1.23")
-    compileOnly("org.projectlombok:lombok")
-    runtimeOnly("org.postgresql:postgresql")
-    annotationProcessor("org.projectlombok:lombok")
     implementation("com.google.code.gson:gson:2.11.0")
-    testImplementation("org.instancio:instancio-junit:4.6.0")
+
+    implementation("org.springframework.boot:spring-boot-starter-security")
+    implementation("io.jsonwebtoken:jjwt-api:$jjwtVersion")
 
     //Test
     testImplementation("org.springframework.boot:spring-boot-starter-test")
@@ -39,6 +40,13 @@ dependencies {
     testImplementation("io.rest-assured:rest-assured:5.4.0")
     testImplementation("com.h2database:h2:2.2.224")
     testImplementation("org.wiremock:wiremock-standalone:3.6.0")
+    testImplementation("org.instancio:instancio-junit:4.6.0")
+
+    //Others
+    compileOnly("org.projectlombok:lombok")
+    runtimeOnly("org.postgresql:postgresql")
+    annotationProcessor("org.projectlombok:lombok")
+
 }
 
 tasks.withType<Test> {

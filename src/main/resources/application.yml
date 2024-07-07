@@ -17,3 +17,7 @@ app:
   mercadopago:
     type-token: Bearer
     api-key: ${MP_API_KEY}
+  security:
+    jwt:
+      secret-key: 25a5356a4956aac7944e164e531d5bd4c145d4057aafabe921648ce4b433a19e
+      expiration: 86400000

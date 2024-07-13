@@ -1,6 +1,7 @@
 package dev.fredyhg.raffleluteranosddd.application.config;
 
 import dev.fredyhg.raffleluteranosddd.domain.models.RequestOrderReceiverPortImpl;
+import dev.fredyhg.raffleluteranosddd.domain.models.admin.RequestAdminReceiverPortImpl;
 import dev.fredyhg.raffleluteranosddd.domain.models.buyer.BuyerDtoReceiverPortImpl;
 import dev.fredyhg.raffleluteranosddd.domain.models.raffle.RequestRaffleReceiverPortImpl;
 import dev.fredyhg.raffleluteranosddd.domain.models.rafflecollection.RaffleCollectionGenWinnerPortImpl;
@@ -36,6 +37,11 @@ public class BeanConfig {
     @Bean
     public RaffleCollectionGenWinnerPortImpl RaffleCollectionGenWinnerPort(RaffleCollectionWithWinnerPersistPort raffleCollectionWithWinnerPersistPort) {
         return new RaffleCollectionGenWinnerPortImpl(raffleCollectionWithWinnerPersistPort);
+    }
+
+    @Bean
+    public RequestAdminReceiverPortImpl requestAdminReceiverPort(AdminPersistPort adminPersistPort) {
+        return new RequestAdminReceiverPortImpl(adminPersistPort);
     }
 
 

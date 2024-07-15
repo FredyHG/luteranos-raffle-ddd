@@ -24,7 +24,7 @@ import java.util.Optional;
 @Slf4j
 @Component
 @RequiredArgsConstructor
-public class CreateOrderUseCase {
+public class SaveOrderUseCase {
 
     private final RequestOrderReceiverPort requestOrderReceiverPort;
     private final FindRaffleByIdUseCase findRaffleByIdUseCase;

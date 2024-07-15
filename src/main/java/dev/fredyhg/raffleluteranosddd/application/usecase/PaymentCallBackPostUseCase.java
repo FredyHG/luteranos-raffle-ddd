@@ -4,7 +4,6 @@ import dev.fredyhg.raffleluteranosddd.adapter.persistence.model.OrderModel;
 import dev.fredyhg.raffleluteranosddd.adapter.persistence.repository.OrderRepository;
 import dev.fredyhg.raffleluteranosddd.application.properties.MercadoPagoProperties;
 import dev.fredyhg.raffleluteranosddd.common.exception.OrderNotFoundException;
-import dev.fredyhg.raffleluteranosddd.domain.models.raffle.Raffle;
 import dev.fredyhg.raffleluteranosddd.infrastructure.http.response.MercadoPagoResponse;
 import dev.fredyhg.raffleluteranosddd.infrastructure.http.response.PaymentGetResponse;
 import lombok.RequiredArgsConstructor;

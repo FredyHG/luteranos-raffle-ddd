@@ -3,14 +3,11 @@ package dev.fredyhg.raffleluteranosddd.domain.models.rafflecollection;
 import dev.fredyhg.raffleluteranosddd.common.domain.Aggregate;
 import dev.fredyhg.raffleluteranosddd.common.exception.RaffleWinnerAlreadyExistsException;
 import dev.fredyhg.raffleluteranosddd.common.exception.UnfinishedRaffleInCollectionException;
-import dev.fredyhg.raffleluteranosddd.domain.enums.OrderStatus;
 import dev.fredyhg.raffleluteranosddd.domain.enums.RaffleCollectionStatus;
-import dev.fredyhg.raffleluteranosddd.domain.models.Order;
 import dev.fredyhg.raffleluteranosddd.domain.models.raffle.Raffle;
 import lombok.Getter;
 
 import java.time.LocalDateTime;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 

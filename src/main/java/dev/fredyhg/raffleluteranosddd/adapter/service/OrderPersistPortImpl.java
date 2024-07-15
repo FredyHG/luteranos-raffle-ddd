@@ -1,12 +1,10 @@
 package dev.fredyhg.raffleluteranosddd.adapter.service;
 
 import dev.fredyhg.raffleluteranosddd.adapter.persistence.model.OrderModel;
-import dev.fredyhg.raffleluteranosddd.adapter.persistence.model.RaffleCollectionModel;
 import dev.fredyhg.raffleluteranosddd.adapter.persistence.model.RaffleModel;
 import dev.fredyhg.raffleluteranosddd.adapter.persistence.repository.OrderRepository;
 import dev.fredyhg.raffleluteranosddd.adapter.persistence.repository.RaffleCollectionRepository;
 import dev.fredyhg.raffleluteranosddd.adapter.persistence.repository.RaffleRepository;
-import dev.fredyhg.raffleluteranosddd.common.exception.RaffleCollectionNotFoundException;
 import dev.fredyhg.raffleluteranosddd.common.mapper.OrderMapper;
 import dev.fredyhg.raffleluteranosddd.common.mapper.RaffleMapper;
 import dev.fredyhg.raffleluteranosddd.domain.models.Order;

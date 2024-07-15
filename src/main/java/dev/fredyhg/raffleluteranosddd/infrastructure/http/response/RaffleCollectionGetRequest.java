@@ -1,7 +1,6 @@
 package dev.fredyhg.raffleluteranosddd.infrastructure.http.response;
 
 import dev.fredyhg.raffleluteranosddd.adapter.persistence.model.RaffleModel;
-import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 

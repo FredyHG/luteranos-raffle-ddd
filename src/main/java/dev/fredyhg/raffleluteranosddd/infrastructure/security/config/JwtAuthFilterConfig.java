@@ -2,6 +2,7 @@ package dev.fredyhg.raffleluteranosddd.infrastructure.security.config;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.google.gson.Gson;
+import dev.fredyhg.raffleluteranosddd.common.exception.InvalidTokenException;
 import dev.fredyhg.raffleluteranosddd.infrastructure.http.response.ResponseMessage;
 import dev.fredyhg.raffleluteranosddd.infrastructure.security.repository.AdminTokenRepository;
 import dev.fredyhg.raffleluteranosddd.infrastructure.security.service.JwtService;
@@ -12,7 +13,11 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.web.authentication.WebAuthenticationDetailsSource;
 import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
 
@@ -33,18 +38,66 @@ public class JwtAuthFilterConfig extends OncePerRequestFilter {
                                     HttpServletResponse response,
                                     FilterChain filterChain) throws ServletException, IOException {
 
-        
+        try {
+            if (isAuthApiRequest(request)) {
+                filterChain.doFilter(request, response);
+                return;
+            }
+
+            final String authHeader = request.getHeader("Authorization");
+            if (isInvalidAuthHeader(authHeader)) {
+                filterChain.doFilter(request, response);
+                return;
+            }
+
+            String jwt = extractJwt(authHeader);
+            String username = jwtService.extractUsername(jwt);
+
+            if (username != null && isUserNotAuthenticated()) {
+                processAuthentication(request, jwt, username);
+            }
+
+            filterChain.doFilter(request, response);
+        } catch (ExpiredJwtException ex) {
+            sendErrorResponse(response, ex);
+        } catch (IOException | ServletException ex) {
+            throw new InvalidTokenException("Invalid token");
+        }
 
     }
 
     private boolean isAuthApiRequest(HttpServletRequest request) {
-        return request.getRequestURI().startsWith("/api/auth/authenticate");
+        return request.getRequestURI().startsWith("/auth/authenticate");
     }
 
-    private boolean extractJwt(String authHeader) {
+    private String extractJwt(String authHeader) {
+        return authHeader.substring(7);
+    }
+
+    private boolean isInvalidAuthHeader(String authHeader) {
         return authHeader == null || !authHeader.startsWith("Bearer ");
     }
 
+    private boolean isUserNotAuthenticated() {
+        return SecurityContextHolder.getContext().getAuthentication() == null;
+    }
+
+    private void processAuthentication(HttpServletRequest request, String jwt, String username) {
+        UserDetails userDetails = userDetailsService.loadUserByUsername(username);
+        if (isTokenValid(jwt, userDetails)) {
+            UsernamePasswordAuthenticationToken authToken = new UsernamePasswordAuthenticationToken(
+                    userDetails, null, userDetails.getAuthorities());
+            authToken.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
+            SecurityContextHolder.getContext().setAuthentication(authToken);
+        }
+    }
+
+    private boolean isTokenValid(String jwt, UserDetails userDetails) {
+        return jwtService.isTokenValid(jwt, userDetails) &&
+                tokenRepository.findByToken(jwt)
+                        .map(t -> !t.isExpired() && !t.isRevoked())
+                        .orElse(false);
+    }
 
     private void sendErrorResponse(HttpServletResponse response, ExpiredJwtException ex) throws IOException {
 

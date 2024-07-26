@@ -1,5 +1,7 @@
-package dev.fredyhg.raffleluteranosddd.common.exception;
+package dev.fredyhg.raffleluteranosddd.common.exception.handler;
 
+import dev.fredyhg.raffleluteranosddd.common.exception.BuyerException;
+import dev.fredyhg.raffleluteranosddd.common.exception.BuyerNotFoundException;
 import dev.fredyhg.raffleluteranosddd.infrastructure.http.response.ErrorResponse;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
@@ -13,12 +15,12 @@ import java.util.Map;
 
 @Slf4j
 @RestControllerAdvice
-public class RaffleExceptionHandler {
+public class BuyerExceptionHandler {
 
     private static final Map<String, HttpStatus> statusTable = new HashMap<>();
 
-    @ExceptionHandler(RaffleException.class)
-    public ResponseEntity<ErrorResponse> handleRaffleException(RaffleException ex){
+    @ExceptionHandler(BuyerException.class)
+    public ResponseEntity<ErrorResponse> handleRaffleException(BuyerException ex){
         log.error("Exception handled: {}", ex.getMessage(), ex);
 
         HttpStatus status = mapStatus(ex);
@@ -33,17 +35,13 @@ public class RaffleExceptionHandler {
         return new ResponseEntity<>(responseMessage, status);
     }
 
-    private HttpStatus mapStatus(RaffleException ex) {
+    private HttpStatus mapStatus(BuyerException ex) {
         return statusTable.getOrDefault(ex.getClass().getSimpleName(), HttpStatus.INTERNAL_SERVER_ERROR);
     }
 
     static {
 
-        // HTTP STATUS 409
-        statusTable.put(RaffleAlreadyExistsException.class.getSimpleName(), HttpStatus.CONFLICT);
-        statusTable.put(RaffleWinnerAlreadyExistsException.class.getSimpleName(), HttpStatus.CONFLICT);
-
         // HTTP STATUS 404
-        statusTable.put(RaffleNotFoundException.class.getSimpleName(), HttpStatus.NOT_FOUND);
+        statusTable.put(BuyerNotFoundException.class.getSimpleName(), HttpStatus.NOT_FOUND);
     }
 }

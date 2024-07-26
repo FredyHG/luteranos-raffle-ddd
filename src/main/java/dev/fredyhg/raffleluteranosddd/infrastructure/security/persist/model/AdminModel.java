@@ -34,6 +34,13 @@ public class AdminModel implements UserDetails {
         this.role = role;
     }
 
+    public AdminModel(String id, String password, String username, Role role) {
+        this.id = id;
+        this.password = password;
+        this.username = username;
+        this.role = role;
+    }
+
     protected AdminModel(){};
 
     @Override

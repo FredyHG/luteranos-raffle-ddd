@@ -61,7 +61,7 @@ public class JwtAuthFilterConfig extends OncePerRequestFilter {
         } catch (ExpiredJwtException ex) {
             sendErrorResponse(response, ex);
         } catch (IOException | ServletException ex) {
-            throw new InvalidTokenException("Invalid token");
+            throw ex;
         }
 
     }

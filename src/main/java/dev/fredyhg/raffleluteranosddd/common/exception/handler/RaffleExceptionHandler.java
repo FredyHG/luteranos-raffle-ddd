@@ -1,5 +1,9 @@
-package dev.fredyhg.raffleluteranosddd.common.exception;
+package dev.fredyhg.raffleluteranosddd.common.exception.handler;
 
+import dev.fredyhg.raffleluteranosddd.common.exception.RaffleAlreadyExistsException;
+import dev.fredyhg.raffleluteranosddd.common.exception.RaffleException;
+import dev.fredyhg.raffleluteranosddd.common.exception.RaffleNotFoundException;
+import dev.fredyhg.raffleluteranosddd.common.exception.RaffleWinnerAlreadyExistsException;
 import dev.fredyhg.raffleluteranosddd.infrastructure.http.response.ErrorResponse;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
@@ -13,12 +17,12 @@ import java.util.Map;
 
 @Slf4j
 @RestControllerAdvice
-public class RaffleCollectionExceptionHandler {
+public class RaffleExceptionHandler {
+
     private static final Map<String, HttpStatus> statusTable = new HashMap<>();
 
-
-    @ExceptionHandler(RaffleCollectionException.class)
-    public ResponseEntity<ErrorResponse> handleRaffleException(RaffleCollectionException ex){
+    @ExceptionHandler(RaffleException.class)
+    public ResponseEntity<ErrorResponse> handleRaffleException(RaffleException ex){
         log.error("Exception handled: {}", ex.getMessage(), ex);
 
         HttpStatus status = mapStatus(ex);
@@ -33,13 +37,17 @@ public class RaffleCollectionExceptionHandler {
         return new ResponseEntity<>(responseMessage, status);
     }
 
-    private HttpStatus mapStatus(RaffleCollectionException ex) {
+    private HttpStatus mapStatus(RaffleException ex) {
         return statusTable.getOrDefault(ex.getClass().getSimpleName(), HttpStatus.INTERNAL_SERVER_ERROR);
     }
 
     static {
 
+        // HTTP STATUS 409
+        statusTable.put(RaffleAlreadyExistsException.class.getSimpleName(), HttpStatus.CONFLICT);
+        statusTable.put(RaffleWinnerAlreadyExistsException.class.getSimpleName(), HttpStatus.CONFLICT);
+
         // HTTP STATUS 404
-        statusTable.put(RaffleCollectionNotFoundException.class.getSimpleName(), HttpStatus.NOT_FOUND);
+        statusTable.put(RaffleNotFoundException.class.getSimpleName(), HttpStatus.NOT_FOUND);
     }
 }

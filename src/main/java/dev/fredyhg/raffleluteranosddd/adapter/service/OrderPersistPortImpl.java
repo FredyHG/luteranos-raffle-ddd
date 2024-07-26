@@ -24,7 +24,6 @@ public class OrderPersistPortImpl implements OrderPersistPort {
 
     private final OrderRepository orderRepository;
     private final RaffleRepository raffleRepository;
-    private final RaffleCollectionRepository raffleCollectionRepository;
 
     @Transactional
     @Override

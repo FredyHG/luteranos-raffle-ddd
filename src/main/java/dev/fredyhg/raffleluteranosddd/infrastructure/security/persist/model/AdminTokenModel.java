@@ -24,4 +24,16 @@ public class AdminTokenModel {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "admin_id")
     private AdminModel admin;
+
+    protected AdminTokenModel() {
+    }
+
+    public AdminTokenModel(String id, String token, TokenType tokenType, AdminModel admin) {
+        this.id = id;
+        this.revoked = false;
+        this.token = token;
+        this.tokenType = tokenType;
+        this.expired = false;
+        this.admin = admin;
+    }
 }

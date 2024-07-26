@@ -23,6 +23,8 @@ public class Admin extends Aggregate<AdminId> {
         assertArgumentNotEmpty(password, "Password cannot be empty");
         assertArgumentMinLength(password, 8, "Password must be at least 8 characters");
 
+        this.role = Role.ROLE_ADMIN;
+
         this.username = username;
         this.password = password;
     }

@@ -6,7 +6,9 @@ import dev.fredyhg.raffleluteranosddd.infrastructure.security.persist.model.Admi
 
 public class AdminMapper {
     public static AdminModel toModel(Admin admin) {
-        return new AdminModel(admin.getPassword(),
+        return new AdminModel(
+                admin.getId().fromValue(),
+                admin.getPassword(),
                 admin.getUsername(),
                 admin.getRole());
     }

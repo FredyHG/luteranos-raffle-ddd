@@ -6,6 +6,7 @@ import dev.fredyhg.raffleluteranosddd.domain.models.buyer.BuyerDtoReceiverPortIm
 import dev.fredyhg.raffleluteranosddd.domain.models.raffle.RequestRaffleReceiverPortImpl;
 import dev.fredyhg.raffleluteranosddd.domain.models.rafflecollection.RaffleCollectionGenWinnerPortImpl;
 import dev.fredyhg.raffleluteranosddd.domain.models.rafflecollection.RaffleCollectionReceiverPortImpl;
+import dev.fredyhg.raffleluteranosddd.domain.models.security.admintoken.AdminTokenReceiverPortImpl;
 import dev.fredyhg.raffleluteranosddd.domain.ports.*;
 import dev.fredyhg.raffleluteranosddd.domain.service.ImageService;
 import org.springframework.context.annotation.Bean;
@@ -15,17 +16,17 @@ import org.springframework.context.annotation.Configuration;
 public class BeanConfig {
 
     @Bean
-    public RequestRaffleReceiverPortImpl receiveRequestRafflePortImpl(RafflePersistPort rafflePersistPort, ImageService imageService) {
+    public RequestRaffleReceiverPortImpl receiveRequestRafflePort(RafflePersistPort rafflePersistPort, ImageService imageService) {
         return new RequestRaffleReceiverPortImpl(rafflePersistPort, imageService);
     }
 
     @Bean
-    public RaffleCollectionReceiverPortImpl raffleCollectionReceiverPortImpl(RaffleCollectionPersistPort raffleCollectionPersistPort) {
+    public RaffleCollectionReceiverPortImpl raffleCollectionReceiverPort(RaffleCollectionPersistPort raffleCollectionPersistPort) {
         return new RaffleCollectionReceiverPortImpl(raffleCollectionPersistPort);
     }
 
     @Bean
-    public BuyerDtoReceiverPortImpl receiveBuyerDtoPortImpl(BuyerPersistPort buyerPersistPort) {
+    public BuyerDtoReceiverPortImpl receiveBuyerDtoPort(BuyerPersistPort buyerPersistPort) {
         return new BuyerDtoReceiverPortImpl(buyerPersistPort);
     }
 
@@ -44,5 +45,8 @@ public class BeanConfig {
         return new RequestAdminReceiverPortImpl(adminPersistPort);
     }
 
-
+    @Bean
+    public AdminTokenReceiverPort adminTokenReceiverPort(AdminTokenPersistPort adminTokenPersistPort) {
+        return new AdminTokenReceiverPortImpl(adminTokenPersistPort);
+    }
 }

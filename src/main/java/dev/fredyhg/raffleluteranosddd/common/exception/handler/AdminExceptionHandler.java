@@ -1,5 +1,9 @@
-package dev.fredyhg.raffleluteranosddd.common.exception;
+package dev.fredyhg.raffleluteranosddd.common.exception.handler;
 
+import dev.fredyhg.raffleluteranosddd.common.exception.AdminException;
+import dev.fredyhg.raffleluteranosddd.common.exception.AdminUsernameAlreadyTakenException;
+import dev.fredyhg.raffleluteranosddd.common.exception.BuyerException;
+import dev.fredyhg.raffleluteranosddd.common.exception.BuyerNotFoundException;
 import dev.fredyhg.raffleluteranosddd.infrastructure.http.response.ErrorResponse;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
@@ -13,12 +17,12 @@ import java.util.Map;
 
 @Slf4j
 @RestControllerAdvice
-public class BuyerExceptionHandler {
+public class AdminExceptionHandler {
 
     private static final Map<String, HttpStatus> statusTable = new HashMap<>();
 
-    @ExceptionHandler(BuyerException.class)
-    public ResponseEntity<ErrorResponse> handleRaffleException(BuyerException ex){
+    @ExceptionHandler(AdminException.class)
+    public ResponseEntity<ErrorResponse> handleAdminException(AdminException ex){
         log.error("Exception handled: {}", ex.getMessage(), ex);
 
         HttpStatus status = mapStatus(ex);
@@ -33,13 +37,14 @@ public class BuyerExceptionHandler {
         return new ResponseEntity<>(responseMessage, status);
     }
 
-    private HttpStatus mapStatus(BuyerException ex) {
+    private HttpStatus mapStatus(AdminException ex) {
         return statusTable.getOrDefault(ex.getClass().getSimpleName(), HttpStatus.INTERNAL_SERVER_ERROR);
     }
 
     static {
 
-        // HTTP STATUS 404
-        statusTable.put(BuyerNotFoundException.class.getSimpleName(), HttpStatus.NOT_FOUND);
+        // HTTP STATUS 409
+        statusTable.put(AdminUsernameAlreadyTakenException.class.getSimpleName(), HttpStatus.CONFLICT);
     }
+
 }

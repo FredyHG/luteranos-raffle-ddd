@@ -1,9 +1,6 @@
 package dev.fredyhg.raffleluteranosddd.common.exception.handler;
 
-import dev.fredyhg.raffleluteranosddd.common.exception.AdminException;
-import dev.fredyhg.raffleluteranosddd.common.exception.AdminUsernameAlreadyTakenException;
-import dev.fredyhg.raffleluteranosddd.common.exception.BuyerException;
-import dev.fredyhg.raffleluteranosddd.common.exception.BuyerNotFoundException;
+import dev.fredyhg.raffleluteranosddd.common.exception.*;
 import dev.fredyhg.raffleluteranosddd.infrastructure.http.response.ErrorResponse;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
@@ -44,6 +41,7 @@ public class AdminExceptionHandler {
     static {
 
         // HTTP STATUS 409
+        statusTable.put(AdminNotFoundException.class.getSimpleName(), HttpStatus.NOT_FOUND);
         statusTable.put(AdminUsernameAlreadyTakenException.class.getSimpleName(), HttpStatus.CONFLICT);
     }
 
